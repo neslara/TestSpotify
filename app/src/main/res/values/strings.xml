@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TestSpotify</string>
+    <string name="search_title">Busca Artista</string>
+</resources>

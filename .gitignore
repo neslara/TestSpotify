@@ -1,3 +1,5 @@
+
+### Android ###
 # Built application files
 *.apk
 *.ap_
@@ -16,6 +18,8 @@ out/
 # Gradle files
 .gradle/
 build/
+.idea/
+gradle/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -38,3 +42,6 @@ captures/
 
 # Keystore files
 *.jks
+
+### Android Patch ###
+gen-external-apklibs
