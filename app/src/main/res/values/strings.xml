@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TestSpotify</string>
-    <string name="search_title">Busca Artista</string>
+    <string name="search_title">Busca un Artista</string>
+    <string name="not_found">No se han encontrado resultados, prueba con otro artista</string>
 </resources>

@@ -1,9 +1,11 @@
-package com.example.neslaram.testspotify.spotify;
+package com.example.neslaram.testspotify.service;
 
+import com.example.neslaram.testspotify.beans.AlbumResponse;
 import com.example.neslaram.testspotify.beans.SearchArtistResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -28,6 +30,9 @@ public interface SpotifyClient {
 //    @GET("/appiphone/android/cancha/feeds/obtenerAlertasConfiguradas.xml")
 //    Call<AlertaConfigurada> getAlertasConfigurdas();
 
-    @GET("search?offset=0&limit=20&type=artist&market=US")
+    @GET("search?type=artist")
     Call<SearchArtistResponse> searchArtist(@Query("query") String artist);
+
+    @GET("artists/{id}/albums")
+    Call<AlbumResponse> getAlbums(@Path("id") String artistId);
 }

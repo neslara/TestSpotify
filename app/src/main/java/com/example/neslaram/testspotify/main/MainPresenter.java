@@ -1,6 +1,6 @@
-package com.example.neslaram.testspotify.spotify;
+package com.example.neslaram.testspotify.main;
 
-import com.example.neslaram.testspotify.spotify.events.SpotifyEvent;
+import com.example.neslaram.testspotify.service.SpotifyEvent;
 
 /**
  * Created by desarrollo on 7/6/16.

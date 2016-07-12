@@ -13,16 +13,20 @@ import com.example.neslaram.testspotify.beans.Artist;
 
 import java.util.List;
 
-/**
- * Created by desarrollo on 7/7/16.
- */
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder> {
 
 
     private List<Artist> artists;
+    private OnItemClickListener<Artist> mItemClickListener;
 
-    public ArtistAdapter(List<Artist> artists) {
+
+    public ArtistAdapter(List<Artist> artists, OnItemClickListener<Artist> itemClickListener) {
         this.artists = artists;
+        this.mItemClickListener = itemClickListener;
     }
 
     @Override
@@ -35,15 +39,8 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         final int index = holder.getAdapterPosition();
 
-        Artist artist = artists.get(index);
-
-        holder.txtArtistName.setText(artist.getName());
-        if (artist.getImages().size() > 1) {
-            Glide.with(holder.imgVwCover.getContext())
-                    .load(artist.getImages().get(1).getUrl())
-                    .into(holder.imgVwCover);
-        }
-
+        holder.setArtist(artists.get(index));
+        holder.bindViewHolder();
     }
 
     @Override
@@ -57,14 +54,38 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgVwCover;
-        TextView txtArtistName;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @Bind(R.id.img_cover)
+        ImageView imgCover;
+        @Bind(R.id.txt_artistname)
+        TextView txtArtistname;
+
+        private Artist artist;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            imgVwCover = (ImageView) itemView.findViewById(R.id.img_cover);
-            txtArtistName = (TextView) itemView.findViewById(R.id.txt_artistname);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        public void bindViewHolder() {
+            txtArtistname.setText(artist.getName());
+            if (artist.getImages().size() > 0) {
+                Glide.with(imgCover.getContext())
+                        .load(artist.getImages().get(0).getUrl())
+                        .into(imgCover);
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mItemClickListener != null)
+                mItemClickListener.onItemClicked(getAdapterPosition(), artist);
+        }
+
+        public void setArtist(Artist artist) {
+            this.artist = artist;
         }
     }
 }

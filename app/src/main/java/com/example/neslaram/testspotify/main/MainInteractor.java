@@ -1,4 +1,4 @@
-package com.example.neslaram.testspotify.spotify;
+package com.example.neslaram.testspotify.main;
 
 /**
  * Created by desarrollo on 7/6/16.

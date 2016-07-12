@@ -1,9 +1,9 @@
-package com.example.neslaram.testspotify.spotify;
+package com.example.neslaram.testspotify.main;
 
 import com.example.neslaram.testspotify.beans.SearchArtistResponse;
 import com.example.neslaram.testspotify.lib.CustomEventBus;
 import com.example.neslaram.testspotify.lib.GreenRobotEventBus;
-import com.example.neslaram.testspotify.spotify.events.SpotifyEvent;
+import com.example.neslaram.testspotify.service.SpotifyEvent;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -47,36 +47,32 @@ public class MainPresenterImpl implements MainPresenter {
     public void onEventMainThread(SpotifyEvent event) {
         switch (event.getEvenType()) {
             case SpotifyEvent.ON_SEARCH_SUCCESS:
-                onSearchSuccess(event.getResponse());
+                onSearchSuccess(event.getArtistResponse());
                 break;
             case SpotifyEvent.ON_SEARCH_ERROR:
                 onSearchError(event.getErrorMessage());
                 break;
             case SpotifyEvent.ON_SEARCH_FAILURE:
-                onSearchFailure(event.getErrorMessage());
+                onSearchError(event.getErrorMessage());
                 break;
         }
     }
 
-
     private void onSearchSuccess(SearchArtistResponse response) {
         if (mainView != null) {
-            mainView.setItems(response.getArtists());
+            int size = response.getArtists().size();
+            if (size > 0) {
+                mainView.setItems(response.getArtists());
+            } else {
+                mainView.setNotFound();
+            }
         }
     }
-
 
     private void onSearchError(String error) {
         if (mainView != null) {
             mainView.showErrorMessage(error);
         }
     }
-
-    private void onSearchFailure(String error) {
-        if (mainView != null) {
-            mainView.showErrorMessage(error);
-        }
-    }
-
 
 }

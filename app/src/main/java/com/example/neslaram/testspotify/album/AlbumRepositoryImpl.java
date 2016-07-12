@@ -1,33 +1,31 @@
-package com.example.neslaram.testspotify.spotify;
+package com.example.neslaram.testspotify.album;
 
+import com.example.neslaram.testspotify.beans.AlbumResponse;
 import com.example.neslaram.testspotify.beans.SearchArtistResponse;
 import com.example.neslaram.testspotify.lib.CustomEventBus;
 import com.example.neslaram.testspotify.lib.GreenRobotEventBus;
-import com.example.neslaram.testspotify.spotify.events.SpotifyEvent;
+import com.example.neslaram.testspotify.service.ServiceGenerator;
+import com.example.neslaram.testspotify.service.SpotifyClient;
+import com.example.neslaram.testspotify.service.SpotifyEvent;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by desarrollo on 7/6/16.
- */
-public class MainRepositoryImpl implements MainRepository {
+public class AlbumRepositoryImpl implements AlbumRepository {
 
 
     @Override
-    public void searchArtist(String artist) {
-        SpotifyClient taskService = ServiceGenerator.createService(SpotifyClient.class);
-
-        Call<SearchArtistResponse> call = taskService.searchArtist(artist);
-        call.enqueue(new Callback<SearchArtistResponse>() {
+    public void getAlbums(String artistId) {
+        SpotifyClient taskService = ServiceGenerator.getApiService();
+        Call<AlbumResponse> call= taskService.getAlbums(artistId);
+        call.enqueue(new Callback<AlbumResponse>() {
             @Override
-            public void onResponse(Call<SearchArtistResponse> call, Response<SearchArtistResponse> response) {
+            public void onResponse(Call<AlbumResponse> call, Response<AlbumResponse> response) {
                 if (response.isSuccessful()) {
 
-                    SearchArtistResponse body = response.body();
-
-                    postEvent(SpotifyEvent.ON_SEARCH_SUCCESS, body);
+                    AlbumResponse body = response.body();
+                    postEvent(SpotifyEvent.ON_ALBUMS_SUCCESS, body);
                 } else {
                     postEvent(SpotifyEvent.ON_SEARCH_FAILURE, response.toString());
                     // error response, no access to resource?
@@ -35,14 +33,14 @@ public class MainRepositoryImpl implements MainRepository {
             }
 
             @Override
-            public void onFailure(Call<SearchArtistResponse> call, Throwable t) {
+            public void onFailure(Call<AlbumResponse> call, Throwable t) {
                 postEvent(SpotifyEvent.ON_SEARCH_ERROR, t.getMessage());
+
             }
         });
     }
 
-
-    private void postEvent(int type, SearchArtistResponse response) {
+    private void postEvent(int type, AlbumResponse response) {
         SpotifyEvent loginEvent = new SpotifyEvent(type, response);
         CustomEventBus eventBus = GreenRobotEventBus.getInstance();
         eventBus.post(loginEvent);
