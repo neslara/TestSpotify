@@ -1,23 +1,17 @@
 package com.example.neslaram.testspotify.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.neslaram.testspotify.R;
 import com.example.neslaram.testspotify.adapters.AlbumAdapter;
-import com.example.neslaram.testspotify.adapters.ArtistAdapter;
-import com.example.neslaram.testspotify.adapters.OnItemClickListener;
 import com.example.neslaram.testspotify.album.AlbumPresenter;
 import com.example.neslaram.testspotify.album.AlbumPresenterImpl;
 import com.example.neslaram.testspotify.album.AlbumView;
 import com.example.neslaram.testspotify.beans.Album;
-import com.example.neslaram.testspotify.beans.Artist;
-import com.example.neslaram.testspotify.main.MainPresenter;
 import com.example.neslaram.testspotify.utils.Constants;
 
 import java.util.ArrayList;
@@ -94,7 +88,5 @@ public class AlbumsActivity extends AppCompatActivity implements AlbumView {
     @Override
     public void showErrorMessage(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
-
     }
-
 }

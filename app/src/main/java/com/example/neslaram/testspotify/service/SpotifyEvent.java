@@ -1,7 +1,7 @@
 package com.example.neslaram.testspotify.service;
 
-import com.example.neslaram.testspotify.beans.AlbumResponse;
-import com.example.neslaram.testspotify.beans.SearchArtistResponse;
+import com.example.neslaram.testspotify.beans.responses.AlbumResponse;
+import com.example.neslaram.testspotify.beans.responses.SearchArtistResponse;
 
 /**
  * Created by desarrollo on 7/6/16.

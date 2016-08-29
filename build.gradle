@@ -6,6 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -29,12 +30,16 @@ ext {
     compileSdkVersion = 23
     buildToolsVersion = '24.0.0'
 
-    supportLibraryVersion = '24.0.0'
-
+    supportLibraryVersion = '24.1.1'
     circleImageViewVersion = '2.0.0'
     firebaseVersion = '9.0.2'
     butterknifeVersion = '7.0.1'
     eventbusVersion = '3.0.0'
     glideVersion = '3.6.1'
     retrofitVersion = '2.1.0'
+
+    //RX
+    rxJavaCallAdapterVersion='2.0.0'
+    rxAndroidVersion='1.2.1'
+    rxJavaVersion='1.1.6'
 }

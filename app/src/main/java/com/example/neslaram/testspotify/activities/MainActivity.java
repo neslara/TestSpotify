@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements MainView, SearchV
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        adapter = new ArtistAdapter(new ArrayList<Artist>(), this);
+        adapter = new ArtistAdapter(new ArrayList<Artist>(), this, this);
         recyclerView.setAdapter(adapter);
         txtVwMain.setText(R.string.search_title);
 
@@ -65,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements MainView, SearchV
 
     @Override
     protected void onDestroy() {
-        mainPresenter.onDestroy();
         super.onDestroy();
+        mainPresenter.onDestroy();
     }
 
     @Override
@@ -93,7 +92,9 @@ public class MainActivity extends AppCompatActivity implements MainView, SearchV
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putString(KEY_ARTIST, searchView.getQuery().toString());
+        if (searchView != null && searchView.getQuery() != null) {
+            outState.putString(KEY_ARTIST, searchView.getQuery().toString());
+        }
         super.onSaveInstanceState(outState);
     }
 
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements MainView, SearchV
 
     @Override
     public void onItemClicked(int position, Artist artist) {
-        Intent intent= new Intent(this, AlbumsActivity.class);
+        Intent intent = new Intent(this, AlbumsActivity.class);
         intent.putExtra(Constants.KEY_ARTIST_ID, artist.getId());
         intent.putExtra(Constants.KEY_ARTIST_NAME, artist.getName());
         startActivity(intent);
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements MainView, SearchV
     @Override
     public boolean onQueryTextSubmit(String query) {
         if (!query.isEmpty()) {
-            mainPresenter.searchArtist(query);
+            mainPresenter.searchArtistRX(query);
         }
 
         return false;

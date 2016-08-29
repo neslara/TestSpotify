@@ -1,5 +1,6 @@
-package com.example.neslaram.testspotify.beans;
+package com.example.neslaram.testspotify.beans.responses;
 
+import com.example.neslaram.testspotify.beans.Artist;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

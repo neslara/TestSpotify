@@ -7,7 +7,10 @@ import rx.Observable;
 /**
  * Created by desarrollo on 7/6/16.
  */
-public interface MainInteractor {
-    void doSearchArtist(String artist);
-    Observable<SearchArtistResponse> doSearchArtistRX(String artist);
+public interface MusicRepository {
+    void searchArtist(String artist);
+    Observable<SearchArtistResponse> searchArtistRX(String artist);
+
+    void getAlbums(String artist);
+
 }

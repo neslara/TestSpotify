@@ -10,8 +10,9 @@ import java.util.List;
  */
 
 public class Artist {
+    private static final String TAG = Artist.class.getSimpleName();
     @SerializedName("followers")
-    public Follower followers ;
+    public Follower followers;
     @SerializedName("href")
     public String href;
     @SerializedName("id")

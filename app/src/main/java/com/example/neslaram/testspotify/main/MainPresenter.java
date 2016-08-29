@@ -8,7 +8,9 @@ import com.example.neslaram.testspotify.service.SpotifyEvent;
 public interface MainPresenter {
     void onCreate();
     void onDestroy();
+    void onDestroyView();
     void searchArtist(String artist);
+    void searchArtistRX(String artist);
     void onEventMainThread(SpotifyEvent event);
 
 }

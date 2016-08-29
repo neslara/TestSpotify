@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:layoutManager="android.support.v7.widget.GridLayoutManager"
-        app:spanCount="2" />
+        app:spanCount="@integer/artist.list.count" />
 
     <RelativeLayout
         android:layout_width="match_parent"

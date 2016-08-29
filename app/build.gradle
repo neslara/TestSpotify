@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -9,6 +10,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        renderscriptTargetApi rootProject.ext.targetSdkVersion
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -31,9 +35,15 @@ dependencies {
     compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
     compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
     compile "org.greenrobot:eventbus:$rootProject.ext.eventbusVersion"
+
+    //Retrofit
     compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
 
-
-
+    //RX
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.ext.rxJavaCallAdapterVersion"
+    compile "io.reactivex:rxandroid:$rootProject.ext.rxAndroidVersion"
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    compile "io.reactivex:rxjava:$rootProject.ext.rxJavaVersion"
 }

@@ -1,6 +1,6 @@
 package com.example.neslaram.testspotify.album;
 
-import com.example.neslaram.testspotify.beans.AlbumResponse;
+import com.example.neslaram.testspotify.beans.responses.AlbumResponse;
 import com.example.neslaram.testspotify.lib.CustomEventBus;
 import com.example.neslaram.testspotify.lib.GreenRobotEventBus;
 import com.example.neslaram.testspotify.service.SpotifyEvent;
